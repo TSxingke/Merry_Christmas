@@ -18,7 +18,7 @@
     quiver = true,
     text = texts[0],
     textIndex = 0,
-    textSize = 50;
+    textSize = 38;
 
   function draw() {
     ctx.clearRect(0, 0, CANVASWIDTH, CANVASHEIGHT);
@@ -153,7 +153,7 @@
   class Particle {
     constructor(canvas) {
       let spread = canvas.height;
-      let size = Math.random() * 1.2;
+      let size = Math.random() * 0.9;
       this.delta = 0.06;
       this.x = 0;
       this.y = 0;
