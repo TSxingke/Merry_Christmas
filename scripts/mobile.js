@@ -3,10 +3,10 @@
     window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 
   const FRAME_RATE = 60;
-  const PARTICLE_NUM = 1000;
+  const PARTICLE_NUM = 2000;
   const RADIUS = Math.PI * 2;
   const CANVASWIDTH = window.innerWidth;
-  const CANVASHEIGHT = 80;
+  const CANVASHEIGHT = 180;
   const CANVASID = 'canvas';
 
   let texts = ['DEAR XIN', 'LOOK UP AT THE', 'STARRY SKY', 'ARE YOU', 'LOOKING AT THE', 'SAME STAR', 'WITH ME ?',
@@ -18,18 +18,21 @@
     quiver = true,
     text = texts[0],
     textIndex = 0,
-    textSize = Math.min(40, window.innerWidth / 8);
+    textSize = 50;
 
   function draw() {
     ctx.clearRect(0, 0, CANVASWIDTH, CANVASHEIGHT);
     ctx.fillStyle = 'rgb(255, 255, 255)';
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+    ctx.lineWidth = 1;
     ctx.textBaseline = 'middle';
     ctx.fontWeight = 'bold';
-    ctx.font = `${textSize}px "Microsoft YaHei", SimHei, "Avenir", "Helvetica Neue", Arial, sans-serif`;
+    ctx.font = textSize + 'px "Microsoft YaHei", SimHei, "Avenir", "Helvetica Neue", Arial, sans-serif';
 
     const textWidth = ctx.measureText(text).width;
     const x = (CANVASWIDTH - textWidth) * 0.5;
     ctx.fillText(text, x, CANVASHEIGHT * 0.5);
+    ctx.strokeText(text, x, CANVASHEIGHT * 0.5);
 
     let imgData = ctx.getImageData(0, 0, CANVASWIDTH, CANVASHEIGHT);
     ctx.clearRect(0, 0, CANVASWIDTH, CANVASHEIGHT);
@@ -107,11 +110,8 @@
   }
 
   function setDimensions() {
-    canvas.width = CANVASWIDTH * window.devicePixelRatio;
-    canvas.height = CANVASHEIGHT * window.devicePixelRatio;
-    canvas.style.width = CANVASWIDTH + 'px';
-    canvas.style.height = CANVASHEIGHT + 'px';
-    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    canvas.width = CANVASWIDTH;
+    canvas.height = CANVASHEIGHT;
   }
 
   function event() {
@@ -139,16 +139,11 @@
     if (canvas === null || !canvas.getContext) {
       return;
     }
-    ctx = canvas.getContext('2d', {
-      antialias: true,
-      alpha: true
-    });
-    
+    ctx = canvas.getContext('2d');
     setDimensions();
     event();
 
-    const particleCount = Math.min(PARTICLE_NUM, Math.floor(window.innerWidth * 0.8));
-    for (var i = 0; i < particleCount; i++) {
+    for (var i = 0; i < PARTICLE_NUM; i++) {
       particles[i] = new Particle(canvas);
     }
 
@@ -195,11 +190,18 @@
       }
     }
     draw(ctx) {
-      ctx.fillStyle = 'rgba(226,225,142, ' + this.opacity + ')';
+      ctx.fillStyle = `rgba(255, 255, 200, ${this.opacity})`;
       ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, RADIUS, true);
+      ctx.arc(this.x, this.y, this.size * 1.5, 0, RADIUS, true);
       ctx.closePath();
       ctx.fill();
+      
+      if (this.opacity > 0.5) {
+        ctx.shadowColor = 'rgba(255, 255, 200, 0.5)';
+        ctx.shadowBlur = 3;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
     }
   }
 

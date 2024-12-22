@@ -1,8 +1,8 @@
 window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
   window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 
-var starDensity = .15; // Reduced for mobile
-var speedCoeff = .05;
+var starDensity = .25; // Reduced for mobile
+var speedCoeff = .03;
 var width;
 var height;
 var starCount;
@@ -87,20 +87,20 @@ function Star() {
 
     if (this.giant) {
       universe.fillStyle = 'rgba(' + giantColor + ',' + this.opacity + ')';
-      universe.arc(this.x, this.y, 2, 0, 2 * Math.PI, false);
+      universe.arc(this.x, this.y, 3, 0, 2 * Math.PI, false);
     } else if (this.comet) {
       universe.fillStyle = 'rgba(' + cometColor + ',' + this.opacity + ')';
-      universe.arc(this.x, this.y, 1.5, 0, 2 * Math.PI, false);
+      universe.arc(this.x, this.y, 2, 0, 2 * Math.PI, false);
 
       //comet tail
       for (var i = 0; i < 30; i++) {
-        universe.fillStyle = 'rgba(' + cometColor + ',' + (this.opacity - (this.opacity / 20) * i) + ')';
-        universe.rect(this.x - this.dx / 4 * i, this.y - this.dy / 4 * i - 2, 2, 2);
+        universe.fillStyle = 'rgba(' + cometColor + ',' + (this.opacity - (this.opacity / 25) * i) + ')';
+        universe.rect(this.x - this.dx / 4 * i, this.y - this.dy / 4 * i - 2, 2.5, 2.5);
         universe.fill();
       }
     } else {
       universe.fillStyle = 'rgba(' + starColor + ',' + this.opacity + ')';
-      universe.rect(this.x, this.y, this.r, this.r);
+      universe.rect(this.x, this.y, this.r * 1.2, this.r * 1.2);
     }
 
     universe.closePath();
