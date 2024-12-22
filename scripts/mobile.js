@@ -24,14 +24,22 @@
     ctx.clearRect(0, 0, CANVASWIDTH, CANVASHEIGHT);
     ctx.fillStyle = 'rgb(255, 255, 255)';
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
-    ctx.lineWidth = 1;
+    ctx.lineWidth = 0.5;
     ctx.textBaseline = 'middle';
     ctx.fontWeight = 'bold';
+    ctx.textRendering = 'optimizeLegibility';
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
     ctx.font = textSize + 'px "Microsoft YaHei", SimHei, "Avenir", "Helvetica Neue", Arial, sans-serif';
 
     const textWidth = ctx.measureText(text).width;
     const x = (CANVASWIDTH - textWidth) * 0.5;
+    ctx.shadowColor = 'rgba(255, 255, 255, 0.3)';
+    ctx.shadowBlur = 1;
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 0;
     ctx.fillText(text, x, CANVASHEIGHT * 0.5);
+    ctx.shadowBlur = 0;
     ctx.strokeText(text, x, CANVASHEIGHT * 0.5);
 
     let imgData = ctx.getImageData(0, 0, CANVASWIDTH, CANVASHEIGHT);
