@@ -3,10 +3,10 @@
     window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 
   const FRAME_RATE = 60;
-  const PARTICLE_NUM = 1000; // Reduced for better mobile performance
+  const PARTICLE_NUM = 1000;
   const RADIUS = Math.PI * 2;
   const CANVASWIDTH = window.innerWidth;
-  const CANVASHEIGHT = 150;
+  const CANVASHEIGHT = 80;
   const CANVASID = 'canvas';
 
   let texts = ['DEAR XIN', 'LOOK UP AT THE', 'STARRY SKY', 'ARE YOU', 'LOOKING AT THE', 'SAME STAR', 'WITH ME ?',
@@ -18,14 +18,14 @@
     quiver = true,
     text = texts[0],
     textIndex = 0,
-    textSize = 40; // Reduced text size for mobile
+    textSize = Math.min(40, window.innerWidth / 8);
 
   function draw() {
     ctx.clearRect(0, 0, CANVASWIDTH, CANVASHEIGHT);
     ctx.fillStyle = 'rgb(255, 255, 255)';
     ctx.textBaseline = 'middle';
     ctx.fontWeight = 'bold';
-    ctx.font = textSize + 'px "Microsoft YaHei", SimHei, "Avenir", "Helvetica Neue", Arial, sans-serif';
+    ctx.font = `${textSize}px "Microsoft YaHei", SimHei, "Avenir", "Helvetica Neue", Arial, sans-serif`;
 
     const textWidth = ctx.measureText(text).width;
     const x = (CANVASWIDTH - textWidth) * 0.5;
@@ -44,7 +44,6 @@
   }
 
   function particleText(imgData) {
-    // Same as original, just adjusted for mobile performance
     var pxls = [];
     for (var w = CANVASWIDTH; w > 0; w -= 3) {
       for (var h = 0; h < CANVASHEIGHT; h += 3) {
@@ -108,8 +107,11 @@
   }
 
   function setDimensions() {
-    canvas.width = CANVASWIDTH;
-    canvas.height = CANVASHEIGHT;
+    canvas.width = CANVASWIDTH * window.devicePixelRatio;
+    canvas.height = CANVASHEIGHT * window.devicePixelRatio;
+    canvas.style.width = CANVASWIDTH + 'px';
+    canvas.style.height = CANVASHEIGHT + 'px';
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
   }
 
   function event() {
@@ -137,11 +139,16 @@
     if (canvas === null || !canvas.getContext) {
       return;
     }
-    ctx = canvas.getContext('2d');
+    ctx = canvas.getContext('2d', {
+      antialias: true,
+      alpha: true
+    });
+    
     setDimensions();
     event();
 
-    for (var i = 0; i < PARTICLE_NUM; i++) {
+    const particleCount = Math.min(PARTICLE_NUM, Math.floor(window.innerWidth * 0.8));
+    for (var i = 0; i < particleCount; i++) {
       particles[i] = new Particle(canvas);
     }
 
@@ -196,7 +203,6 @@
     }
   }
 
-  // Handle audio autoplay
   function playAudio() {
     const audio = document.querySelector('audio');
     audio.volume = 0.5;
@@ -209,7 +215,6 @@
     playAudio();
   }, { once: true });
 
-  // Initialize on load
   window.addEventListener('load', init);
   window.addEventListener('resize', setDimensions);
 
