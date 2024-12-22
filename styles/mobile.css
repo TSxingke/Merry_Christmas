@@ -60,7 +60,7 @@ body {
     height: 100%;
     position: absolute;
     left: 50%;
-    margin-left: -1200px;
+    margin-left: -1700px;
     bottom: -50px;
     transform: scale(0.6);
 }
@@ -85,7 +85,7 @@ body {
 @media screen and (max-width: 375px) {
     #scene {
         transform: scale(0.5);
-        margin-left: -1200px;
+        margin-left: -1700px;
     }
     
     #boy_1_ {
@@ -96,7 +96,7 @@ body {
 @media screen and (min-width: 376px) and (max-width: 414px) {
     #scene {
         transform: scale(0.55);
-        margin-left: -1250px;
+        margin-left: -1750px;
     }
     
     #boy_1_ {
@@ -107,7 +107,7 @@ body {
 @media screen and (min-width: 415px) and (max-width: 768px) {
     #scene {
         transform: scale(0.6);
-        margin-left: -1200px;
+        margin-left: -1700px;
     }
     
     #boy_1_ {
