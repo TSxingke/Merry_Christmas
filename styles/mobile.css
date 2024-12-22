@@ -75,3 +75,21 @@ body {
 #stone1, #stone2, #stone3, #stone4 {
     fill: rgba(182,192,205,0.4);
 }
+
+#boy_1_ {
+    fill: rgba(182,192,205,0.6);
+    transform: scale(0.8) translateY(20px);
+}
+
+#boy path {
+    fill: rgba(182,192,205,0.6);
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+#boy_1_ {
+    animation: float 3s ease-in-out infinite;
+}
