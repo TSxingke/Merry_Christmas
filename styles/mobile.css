@@ -60,12 +60,14 @@ body {
     height: 100%;
     position: absolute;
     left: 50%;
-    margin-left: -150%;
+    margin-left: -450px;
     bottom: -50px;
+    transform: scale(0.6);
 }
 
 #ground {
     fill: rgba(182,192,205,0.3);
+    transform: translateY(-30px);
 }
 
 #greens path {
@@ -78,7 +80,7 @@ body {
 
 #boy_1_ {
     fill: rgba(182,192,205,0.6);
-    transform: scale(0.8) translateY(20px);
+    transform: scale(0.6) translate(-200px, 20px);
 }
 
 #boy path {
@@ -92,4 +94,37 @@ body {
 
 #boy_1_ {
     animation: float 3s ease-in-out infinite;
+}
+
+@media screen and (max-width: 375px) {
+    #scene {
+        transform: scale(0.5);
+        margin-left: -400px;
+    }
+    
+    #boy_1_ {
+        transform: scale(0.5) translate(-200px, 20px);
+    }
+}
+
+@media screen and (min-width: 376px) and (max-width: 414px) {
+    #scene {
+        transform: scale(0.55);
+        margin-left: -420px;
+    }
+    
+    #boy_1_ {
+        transform: scale(0.55) translate(-200px, 20px);
+    }
+}
+
+@media screen and (min-width: 415px) and (max-width: 768px) {
+    #scene {
+        transform: scale(0.6);
+        margin-left: -450px;
+    }
+    
+    #boy_1_ {
+        transform: scale(0.6) translate(-200px, 20px);
+    }
 }
