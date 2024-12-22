@@ -3,10 +3,10 @@
     window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 
   const FRAME_RATE = 60;
-  const PARTICLE_NUM = 2000;
+  const PARTICLE_NUM = 1800;
   const RADIUS = Math.PI * 2;
   const CANVASWIDTH = window.innerWidth;
-  const CANVASHEIGHT = 180;
+  const CANVASHEIGHT = 160;
   const CANVASID = 'canvas';
 
   let texts = ['DEAR XIN', 'LOOK UP AT THE', 'STARRY SKY', 'ARE YOU', 'LOOKING AT THE', 'SAME STAR', 'WITH ME ?',
@@ -192,13 +192,13 @@
     draw(ctx) {
       ctx.fillStyle = `rgba(255, 255, 200, ${this.opacity})`;
       ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size * 1.5, 0, RADIUS, true);
+      ctx.arc(this.x, this.y, this.size * 1, 0, RADIUS, true);
       ctx.closePath();
       ctx.fill();
       
       if (this.opacity > 0.5) {
         ctx.shadowColor = 'rgba(255, 255, 200, 0.5)';
-        ctx.shadowBlur = 3;
+        ctx.shadowBlur = 2;
         ctx.fill();
         ctx.shadowBlur = 0;
       }
